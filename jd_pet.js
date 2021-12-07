@@ -31,9 +31,9 @@ let cookiesArr = [], cookie = '', jdPetShareArr = [], isBox = false, notify, new
 //下面给出两个账号的填写示例（iOS只支持2个京东账号）
 let shareCodes = [ // IOS本地脚本用户这个列表填入你要助力的好友的shareCode
   //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
-  'MTAxODcxOTI2NTAwMDAwMDAyNTE5ODU4OQ==@MTAxODEyMjkyMDAwMDAwMDM5MzI3ODM1@MTE1NDUyMjEwMDAwMDAwMzUyNDI3Njk=@MTE1NDUyMjEwMDAwMDAwMzgxMjgwNjM=@MTE1NDAxNzYwMDAwMDAwMzk2NjQ2MjE=@MTE1NDQ5MzYwMDAwMDAwMzgwNzQxMTc=@MTAxODc2NTE0NzAwMDAwMDAyMTgwNDcwNw==',
+//  'MTAxODcxOTI2NTAwMDAwMDAyNTE5ODU4OQ==@MTAxODEyMjkyMDAwMDAwMDM5MzI3ODM1@MTE1NDUyMjEwMDAwMDAwMzUyNDI3Njk=@MTE1NDUyMjEwMDAwMDAwMzgxMjgwNjM=@MTE1NDAxNzYwMDAwMDAwMzk2NjQ2MjE=@MTE1NDQ5MzYwMDAwMDAwMzgwNzQxMTc=@MTAxODc2NTE0NzAwMDAwMDAyMTgwNDcwNw==',
   //账号二的好友shareCode,不同好友的shareCode中间用@符号隔开
-  'MTAxODcxOTI2NTAwMDAwMDAyNTE5ODU4OQ==@MTAxODEyMjkyMDAwMDAwMDM5MzI3ODM1@MTE1NDUyMjEwMDAwMDAwMzUyNDI3Njk=@MTE1NDUyMjEwMDAwMDAwMzgxMjgwNjM=@MTE1NDAxNzYwMDAwMDAwMzk2NjQ2MjE=@MTE1NDQ5MzYwMDAwMDAwMzgwNzQxMTc=@MTAxODc2NTE0NzAwMDAwMDAyMTgwNDcwNw==',
+//  'MTAxODcxOTI2NTAwMDAwMDAyNTE5ODU4OQ==@MTAxODEyMjkyMDAwMDAwMDM5MzI3ODM1@MTE1NDUyMjEwMDAwMDAwMzUyNDI3Njk=@MTE1NDUyMjEwMDAwMDAwMzgxMjgwNjM=@MTE1NDAxNzYwMDAwMDAwMzk2NjQ2MjE=@MTE1NDQ5MzYwMDAwMDAwMzgwNzQxMTc=@MTAxODc2NTE0NzAwMDAwMDAyMTgwNDcwNw==',
 ]
 let message = '', subTitle = '', option = {};
 let jdNotify = false;//是否关闭通知，false打开通知推送，true关闭通知推送
@@ -459,8 +459,8 @@ function readShareCode() {
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            console.log(`随机取个${randomCount}码放到您固定的互助码后面(不影响已有固定互助)`)
-            data = JSON.parse(data);
+            console.log(`sgh——随机取个${randomCount}码放到您固定的互助码后面(不影响已有固定互助)`)
+//            data = JSON.parse(data);
           }
         }
       } catch (e) {
@@ -479,17 +479,17 @@ function shareCodesFormat() {
     newShareCodes = [];
     if ($.shareCodesArr[$.index - 1]) {
       newShareCodes = $.shareCodesArr[$.index - 1].split('@');
-    } else {
+    } else if ((shareCodes.length - 1)) {
       console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
       const tempIndex = $.index > shareCodes.length ? (shareCodes.length - 1) : ($.index - 1);
       newShareCodes = shareCodes[tempIndex].split('@');
     }
     //因好友助力功能下线。故暂时屏蔽
-    const readShareCodeRes = await readShareCode();
+    //const readShareCodeRes = await readShareCode();
     //const readShareCodeRes = null;
-    if (readShareCodeRes && readShareCodeRes.code === 200) {
-      newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
-    }
+    //if (readShareCodeRes && readShareCodeRes.code === 200) {
+      //newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
+    //}
     console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify(newShareCodes)}`)
     resolve();
   })

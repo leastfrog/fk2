@@ -53,8 +53,8 @@ if ($.isNode()) {
         // await drawUserTask();
     }
     shareCodes = shareCodes.filter(code => code)
-    const author = Math.random() > 0.5 ? 'zero205' : 'ZXX2021'
-    await getShareCode('nnfls.json', author, 3, true)
+//    const author = Math.random() > 0.5 ? 'zero205' : 'ZXX2021'
+//    await getShareCode('nnfls.json', author, 3, true)
     shareCodes = [...new Set([...shareCodes, ...($.shareCode || [])])];
     if (shareCodes.length > 0) {
         console.log(`\n*********开始互助**********\n`);
@@ -90,7 +90,7 @@ if ($.isNode()) {
 
 })().catch((e) => { $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '') }).finally(() => { $.done(); })
 
-function getShareCode(name, author = 'zero205', num = -1, shuffle = false) {
+function getShareCode(name, author = '', num = -1, shuffle = false) {
     return new Promise(resolve => {
         $.get({
             url: `https://raw.fastgit.org/${author}/updateTeam/main/shareCodes/${name}`,
