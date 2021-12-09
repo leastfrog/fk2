@@ -167,7 +167,7 @@ async function doDailyTask() {
     for (let advert of adverts) { //开始浏览广告
       if (advert.limit <= advert.hadFinishedTimes) {
         // browseReward+=advert.reward
-        console.log(`${advert.mainTitle}+ ' 已完成`);//,获得${advert.reward}g
+        console.log(`${advert.mainTitle}+ ' 已完成'`);//,获得${advert.reward}g
         continue;
       }
       console.log('正在进行广告浏览任务: ' + advert.mainTitle);
@@ -1312,8 +1312,8 @@ function readShareCode() {
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            console.log(`随机取个${randomCount}码放到您固定的互助码后面(不影响已有固定互助)`)
-            data = JSON.parse(data);
+            console.log(`随机取个${randomCount}码放到您固定的互助码后面(不影响已有固定互助) sgh`)
+            //data = JSON.parse(data);
           }
         }
       } catch (e) {
@@ -1337,11 +1337,11 @@ function shareCodesFormat() {
       const tempIndex = $.index > shareCodes.length ? (shareCodes.length - 1) : ($.index - 1);
       newShareCodes = shareCodes[tempIndex].split('@');
     }
-    const readShareCodeRes = await readShareCode();
-    if (readShareCodeRes && readShareCodeRes.code === 200) {
+    //const readShareCodeRes = await readShareCode();
+    //if (readShareCodeRes && readShareCodeRes.code === 200) {
       // newShareCodes = newShareCodes.concat(readShareCodeRes.data || []);
-      newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
-    }
+      //newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
+    //}
     console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify(newShareCodes)}`)
     resolve();
   })

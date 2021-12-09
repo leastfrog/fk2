@@ -7,7 +7,7 @@
  * @param text 通知头
  * @param desp 通知体
  * @param params 某些推送通知方式点击弹窗可跳转, 例：{ url: 'https://abc.com' }
- * @param author 作者仓库等信息  例：`本通知 By：https://github.com/leastfrog/fk2`
+ * @param author 作者仓库等信息  例：`本通知 By：https://github.com/whyour/qinglong`
  */
 //详细说明参考 https://github.com/ccwav/QLScript2.
 const querystring = require('querystring');
@@ -114,7 +114,7 @@ let GOTIFY_PRIORITY = 0;
  * @param text 通知头
  * @param desp 通知体
  * @param params 某些推送通知方式点击弹窗可跳转, 例：{ url: 'https://abc.com' }
- * @param author 作者仓库等信息  例：`本通知 By：https://github.com/leastfrog/fk2`
+ * @param author 作者仓库等信息  例：`本通知 By：https://github.com/whyour/qinglong`
  * @returns {Promise<unknown>}
  */
 let PushErrorTime = 0;
@@ -123,7 +123,6 @@ let ShowRemarkType = "1";
 let Notify_NoCKFalse = "false";
 let Notify_NoLoginSuccess = "false";
 let UseGroupNotify = 1;
-let desp = "";
 let strAuthor = "";
 const {
     getEnvs
@@ -159,7 +158,7 @@ let strCustomArr = [];
 let strCustomTempArr = [];
 let Notify_CKTask = "";
 let Notify_SkipText = [];
-async function sendNotify(text, desp, params = {}, author = '') {
+async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By ccwav Mod') {
     console.log(`开始发送通知...`);
     try {
         //Reset 变量
@@ -1204,10 +1203,10 @@ async function sendNotify(text, desp, params = {}, author = '') {
     }
 
     //提供6种通知
-    //if (strAuthor)
-        //desp += '\n\n本通知 By ' + strAuthor + "\n通知时间: " + GetDateTime(new Date());
-    //else
-        //desp += author + "\n通知时间: " + GetDateTime(new Date());
+    if (strAuthor)
+        desp += '\n\n本通知 By ' + strAuthor + "\n通知时间: " + GetDateTime(new Date());
+    else
+        desp += author + "\n通知时间: " + GetDateTime(new Date());
 
     await serverNotify(text, desp); //微信server酱
 
@@ -1260,7 +1259,7 @@ async function sendNotify(text, desp, params = {}, author = '') {
         ]);
 }
 
-async function sendNotifybyWxPucher(text, desp, PtPin, author = '') {
+async function sendNotifybyWxPucher(text, desp, PtPin, author = '\n\n本通知 By ccwav Mod') {
 
     try {
         var Uid = "";
@@ -1289,10 +1288,10 @@ async function sendNotifybyWxPucher(text, desp, PtPin, author = '') {
                 console.log("查询到Uid ：" + Uid);
                 WP_UIDS_ONE = Uid;
                 console.log("正在发送一对一通知,请稍后...");
-                //if (strAuthor)
-                    //desp += '\n\n本通知 By ' + strAuthor;
-                //else
-                    //desp += author;
+                if (strAuthor)
+                    desp += '\n\n本通知 By ' + strAuthor;
+                else
+                    desp += author;
 
                 if (llShowRemark == "true") {
                     //开始读取青龙变量列表
@@ -1753,7 +1752,7 @@ function qywxamNotify(text, desp) {
                         textcard: {
                             title: `${text}`,
                             description: `${desp}`,
-                            //url: 'https://github.com/whyour/qinglong',
+                            url: 'https://github.com/whyour/qinglong',
                             btntxt: '更多',
                         },
                     };
