@@ -22,9 +22,6 @@ if (process.env.FRUITSHARECODES) {
   if (process.env.FRUITSHARECODES.indexOf('\n') > -1) {
     console.log(`您的东东农场互助码选择的是用换行隔开\n`)
     FruitShareCodes = process.env.FRUITSHARECODES.split('\n');
-  } else if (process.env.FRUITSHARECODES.indexOf('&') > -1) {
-    console.log(`您的东东农场互助码选择的是用&隔开\n`)
-    FruitShareCodes = process.env.FRUITSHARECODES.split('&');
   } else {
     FruitShareCodes = process.env.FRUITSHARECODES.split();
   }
