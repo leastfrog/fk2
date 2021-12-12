@@ -167,7 +167,7 @@ async function doDailyTask() {
     for (let advert of adverts) { //开始浏览广告
       if (advert.limit <= advert.hadFinishedTimes) {
         // browseReward+=advert.reward
-        console.log(`${advert.mainTitle}+ ' 已完成`);//,获得${advert.reward}g
+        console.log(`${advert.mainTitle}+ ' 已完成'`);//,获得${advert.reward}g
         continue;
       }
       console.log('正在进行广告浏览任务: ' + advert.mainTitle);
