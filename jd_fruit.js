@@ -1305,15 +1305,15 @@ function timeFormat(time) {
 }
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: `http://transfer.nz.lu/farm`, timeout: 10000}, (err, resp, data) => {
+    $.get({url: ``, timeout: 10000}, (err, resp, data) => {
       try {
         if (err) {
-          console.log(JSON.stringify(err))
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          //console.log(JSON.stringify(err))
+          //console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            console.log(`随机取个${randomCount}码放到您固定的互助码后面(不影响已有固定互助) sgh`)
-            //data = JSON.parse(data);
+            console.log(`随机取个${randomCount}码放到您固定的互助码后面(不影响已有固定互助)`)
+            data = JSON.parse(data);
           }
         }
       } catch (e) {
@@ -1332,7 +1332,7 @@ function shareCodesFormat() {
     newShareCodes = [];
     if ($.shareCodesArr[$.index - 1]) {
       newShareCodes = $.shareCodesArr[$.index - 1].split('@');
-    } else if (shareCodes.length - 1){
+    } else {
       console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
       const tempIndex = $.index > shareCodes.length ? (shareCodes.length - 1) : ($.index - 1);
       newShareCodes = shareCodes[tempIndex].split('@');
