@@ -167,7 +167,7 @@ async function doDailyTask() {
     for (let advert of adverts) { //开始浏览广告
       if (advert.limit <= advert.hadFinishedTimes) {
         // browseReward+=advert.reward
-        console.log(`${advert.mainTitle}+ ' 已完成`);//,获得${advert.reward}g
+        console.log(`${advert.mainTitle}+ ' 已完成'`);//,获得${advert.reward}g
         continue;
       }
       console.log('正在进行广告浏览任务: ' + advert.mainTitle);
@@ -1308,8 +1308,8 @@ function readShareCode() {
     $.get({url: ``, timeout: 10000}, (err, resp, data) => {
       try {
         if (err) {
-          console.log(JSON.stringify(err))
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          //console.log(JSON.stringify(err))
+          //console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
             console.log(`随机取个${randomCount}码放到您固定的互助码后面(不影响已有固定互助)`)
