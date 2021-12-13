@@ -158,7 +158,7 @@ let strCustomArr = [];
 let strCustomTempArr = [];
 let Notify_CKTask = "";
 let Notify_SkipText = [];
-async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By ccwav Mod') {
+async function sendNotify(text, desp, params = {}, author = '') {
     console.log(`开始发送通知...`);
     try {
         //Reset 变量
@@ -1204,9 +1204,9 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By cc
 
     //提供6种通知
     if (strAuthor)
-        desp += '\n\n本通知 By ' + strAuthor + "\n通知时间: " + GetDateTime(new Date());
+        //desp += '\n\n本通知 By ' + strAuthor + "\n通知时间: " + GetDateTime(new Date());
     else
-        desp += author + "\n通知时间: " + GetDateTime(new Date());
+        //desp += author + "\n通知时间: " + GetDateTime(new Date());
 
     await serverNotify(text, desp); //微信server酱
 
@@ -1259,7 +1259,7 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By cc
         ]);
 }
 
-async function sendNotifybyWxPucher(text, desp, PtPin, author = '\n\n本通知 By ccwav Mod') {
+async function sendNotifybyWxPucher(text, desp, PtPin, author = '') {
 
     try {
         var Uid = "";
@@ -1289,9 +1289,9 @@ async function sendNotifybyWxPucher(text, desp, PtPin, author = '\n\n本通知 B
                 WP_UIDS_ONE = Uid;
                 console.log("正在发送一对一通知,请稍后...");
                 if (strAuthor)
-                    desp += '\n\n本通知 By ' + strAuthor;
+                    //desp += '\n\n本通知 By ' + strAuthor;
                 else
-                    desp += author;
+                    //desp += author;
 
                 if (llShowRemark == "true") {
                     //开始读取青龙变量列表
@@ -1752,7 +1752,7 @@ function qywxamNotify(text, desp) {
                         textcard: {
                             title: `${text}`,
                             description: `${desp}`,
-                            url: 'https://github.com/whyour/qinglong',
+                            url: '',
                             btntxt: '更多',
                         },
                     };
