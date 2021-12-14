@@ -1312,7 +1312,7 @@ function readShareCode() {
       try {
         if (err) {
           console.log(JSON.stringify(err))
-          console.log(`${$.name} 作者API请求失败，请检查网路重试 sgh`)
+          console.log(`${$.name} 已去除作者助力`)
         } else {
           if (data) {
             console.log(`随机取个${randomCount}码放到您固定的互助码后面(不影响已有固定互助)`)
