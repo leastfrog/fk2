@@ -263,10 +263,10 @@ function getTaskList(body) {
           console.log(`${$.name} getTaskList API请求失败，请检查网路重试`)
         } else {
             data = JSON.parse(data)
-            //console.log(JSON.stringify(data))
+            console.log(JSON.stringify(data))
             if (data.code === 0){
                 $.allTaskList = data.tasks;
-                //console.log(JSON.stringify($.allTaskList))
+                console.log(JSON.stringify($.allTaskList))
             }else{
                 console.log(`获取任务列表失败：${JSON.stringify(data)}`)
             }
