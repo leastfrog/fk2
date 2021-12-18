@@ -174,7 +174,7 @@ async function main() {
                     }
                 )
             }
-            console.log(JSON.stringify($.shareCoseList))
+            //console.log(JSON.stringify($.shareCoseList))
         }
         await $.wait(500)
         for (let doit of $.channel){
