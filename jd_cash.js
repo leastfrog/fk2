@@ -27,13 +27,10 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
-let helpAuthor = true;
+let helpAuthor = false;
 const randomCount = $.isNode() ? 5 : 5;
 let cash_exchange = false;//是否消耗2元红包兑换200京豆，默认否
-const inviteCodes = [
-  `f05mL6jkJKNx@eU9YauXjN_pz9mnczyEQ1Q@eU9YM7XpG4FvqTqWkiZi@YF5pL7TjOaB3rwGI@IhM3b-iyY_sl92-6iw@9pq2tFYzsHmhJ_50ynEQ@eU9Yarrmbv8k9mnczydB0g@eU9Yar3mb_9392aHy3Qb3w@ZE9JL7fFMoZzsBKQmiVE@ZEppO7brN6JyrjCCynob3w@IhMxb-y3Z_ku9W26iw@dEprMLnsLKR3rg`,
-  `f05mL6jkJKNx@eU9YauXjN_pz9mnczyEQ1Q@eU9YM7XpG4FvqTqWkiZi@YF5pL7TjOaB3rwGI@IhM3b-iyY_sl92-6iw@9pq2tFYzsHmhJ_50ynEQ@eU9Yarrmbv8k9mnczydB0g@eU9Yar3mb_9392aHy3Qb3w@ZE9JL7fFMoZzsBKQmiVE@ZEppO7brN6JyrjCCynob3w@IhMxb-y3Z_ku9W26iw@dEprMLnsLKR3rg`,
-]
+const inviteCodes = []
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -50,9 +47,11 @@ let allMessage = '';
     return;
   }
   await requireConfig()
-  $.authorCode = await getAuthorShareCode('https://raw.githubusercontent.com/leastfrog/updateTeam/master/shareCodes/jd_updateCash.json')
+  $.authorCode = await getAuthorShareCode('')
   if (!$.authorCode) {
-    console.log(`\n刷新 SGH 异常\n`);
+    $.http.get({url: ''}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+    await $.wait(1000)
+    $.authorCode = await getAuthorShareCode('') || []
   }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
@@ -489,15 +488,19 @@ function showMsg() {
 function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
-    $.get({url: ``, 'timeout': 300}, (err, resp, data) => {
+    $.get({url: ``, 'timeout': 30000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
+<<<<<<< HEAD
           console.log(`${$.name} sgh 已清除`)
+=======
+          console.log(`${$.name} 已去除作者助力`)
+>>>>>>> parent of bcd6144 (Update jd_cash.js)
         } else {
           if (data) {
-            console.log(`sgh 检查 随机取个${randomCount}码`)
-            data = JSON.parse(data);
+            console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
+            //data = JSON.parse(data);
           }
         }
       } catch (e) {
