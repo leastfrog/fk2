@@ -128,7 +128,7 @@ async function appindex(info=false) {
   let functionId = "cash_homePage"
   let body = "%7B%7D"
   let uuid = randomString(16)
-  let sign = await getSign(functionId, decodeURIComponent(body), uuid)
+  //let sign = await getSign(functionId, decodeURIComponent(body), uuid)
   let url = `${JD_API_HOST}?functionId=${functionId}&build=167774&client=apple&clientVersion=10.1.0&uuid=${uuid}&${sign}`
   return new Promise((resolve) => {
     $.post(apptaskUrl(url, body), async (err, resp, data) => {
@@ -296,7 +296,7 @@ async function appdoTask(type,taskInfo) {
   let functionId = 'cash_doTask'
   let body = escape(JSON.stringify({"type":type,"taskInfo":taskInfo}))
   let uuid = randomString(16)
-  let sign = await getSign(functionId, decodeURIComponent(body), uuid)
+  //let sign = await getSign(functionId, decodeURIComponent(body), uuid)
   let url = `${JD_API_HOST}?functionId=${functionId}&build=167774&client=apple&clientVersion=10.1.0&uuid=${uuid}&${sign}`
   return new Promise((resolve) => {
     $.post(apptaskUrl(url, body), (err, resp, data) => {
@@ -493,7 +493,7 @@ function readShareCode() {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} sgj 已清除`)
+          console.log(`${$.name} sgh 已清除`)
         } else {
           if (data) {
             console.log(`sgh 检查 随机取个${randomCount}码`)
