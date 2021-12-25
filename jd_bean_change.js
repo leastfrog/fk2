@@ -558,22 +558,12 @@ async function showMsg() {
 	ReturnMessage += `\n`;
 	strsummary+= `\n`;
 	ReturnMessage += `【昨日京豆】收${$.incomeBean}豆`;
-<<<<<<< Updated upstream
-	strsummary+= `【昨日京豆】收${$.incomeBean}豆`;
-	if ($.expenseBean != 0) {
-		ReturnMessage += `,支${$.expenseBean}豆`;
-		strsummary += `,支${$.expenseBean}豆`;
-	}
-	ReturnMessage += `\n`;	
-	strsummary += `\n`;	
-=======
 	
 	if ($.expenseBean != 0) {
 		ReturnMessage += `,支${$.expenseBean}豆`;		
 	}
 	ReturnMessage += `\n`;	
 	
->>>>>>> Stashed changes
 	if ($.beanCount){		
 		ReturnMessage += `【当前京豆】${$.beanCount}豆(≈${(($.beanCount-$.beanChangeXi)/ 100).toFixed(2)}元)\n`;
 		strsummary+= `【当前京豆】${$.beanCount}豆(≈${(($.beanCount-$.beanChangeXi)/ 100).toFixed(2)}元)\n`;	
@@ -587,24 +577,6 @@ async function showMsg() {
 	}
 	
 	if (doCheckJxBeans == "true") {
-<<<<<<< Updated upstream
-		ReturnMessage += `【今日喜豆】收${$.todayinJxBean}豆`;
-		strsummary+= `【今日喜豆】收${$.todayinJxBean}豆`;
-		if ($.todayOutJxBean != 0) {
-			ReturnMessage += `,支${$.todayOutJxBean}豆`;
-			strsummary += `,支${$.todayOutJxBean}豆`;
-		}
-		ReturnMessage += `\n`;
-		strsummary += `\n`;
-		ReturnMessage += `【昨日喜豆】收${$.inJxBean}豆`;
-		strsummary += `【昨日喜豆】收${$.inJxBean}豆`;
-		if ($.OutJxBean != 0) {
-			ReturnMessage += `,支${$.OutJxBean}豆`;
-			strsummary += `,支${$.OutJxBean}豆`;
-		}
-		ReturnMessage += `\n`;
-		strsummary += `\n`;
-=======
 		ReturnMessage += `【今日喜豆】收${$.todayinJxBean}豆`;		
 		if ($.todayOutJxBean != 0) {
 			ReturnMessage += `,支${$.todayOutJxBean}豆`;			
@@ -615,7 +587,6 @@ async function showMsg() {
 			ReturnMessage += `,支${$.OutJxBean}豆`;			
 		}
 		ReturnMessage += `\n`;		
->>>>>>> Stashed changes
 		ReturnMessage += `【当前喜豆】${$.xibeanCount}喜豆(≈${($.xibeanCount/ 100).toFixed(2)}元)\n`;
 		strsummary += `【当前喜豆】${$.xibeanCount}喜豆(≈${($.xibeanCount/ 100).toFixed(2)}元)\n`;
 	}

@@ -33,17 +33,10 @@ if (process.env.NO_RUSH && process.env.NO_RUSH != "") {
         return;
     }
     
-<<<<<<< Updated upstream
-    authorCodeList = await getAuthorCodeList('')
-    if($.getAuthorCodeListerr === false){
-        authorCodeList = [
-           // '2a950a42a8d146a38efb24654a7c1390',
-=======
     authorCodeList = await getAuthorCodeList('https://gitee.com/fatelight/code/raw/master/lzdz1_jx.json')
     if($.getAuthorCodeListerr === false){
         authorCodeList = [
             '2a950a42a8d146a38efb24654a7c1390',
->>>>>>> Stashed changes
         ]
     }
 

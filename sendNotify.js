@@ -166,14 +166,9 @@ let isLogin = false;
 if (process.env.NOTIFY_SHOWNAMETYPE) {
     ShowRemarkType = process.env.NOTIFY_SHOWNAMETYPE;
 }
-<<<<<<< Updated upstream
-async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By ccwav Mod') {
-    console.log(`开始发送通知...`);
-=======
 async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By ccwav Mod',strsummary="") {
     console.log(`开始发送通知...`);
 	
->>>>>>> Stashed changes
     try {
         //Reset 变量
         UseGroupNotify = 1;
@@ -215,159 +210,6 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By cc
         var Use_gobotNotify = true;
         var Use_pushPlushxtripNotify = true;
         var Use_WxPusher = true;
-<<<<<<< Updated upstream
-
-        if (process.env.NOTIFY_NOCKFALSE) {
-            Notify_NoCKFalse = process.env.NOTIFY_NOCKFALSE;
-        }
-        if (process.env.NOTIFY_NOLOGINSUCCESS) {
-            Notify_NoLoginSuccess = process.env.NOTIFY_NOLOGINSUCCESS;
-        }
-        if (process.env.NOTIFY_CKTASK) {
-            Notify_CKTask = process.env.NOTIFY_CKTASK;
-        }
-
-        if (process.env.NOTIFY_SKIP_TEXT && desp) {
-            Notify_SkipText = process.env.NOTIFY_SKIP_TEXT.split('&');
-            if (Notify_SkipText.length > 0) {
-                for (var Templ in Notify_SkipText) {
-                    if (desp.indexOf(Notify_SkipText[Templ]) != -1) {
-                        console.log("检测内容到内容存在屏蔽推送的关键字(" + Notify_SkipText[Templ] + ")，将跳过推送...");
-                        return;
-                    }
-                }
-            }
-        }
-
-        if (text.indexOf("cookie已失效") != -1 || desp.indexOf("重新登录获取") != -1) {
-            console.log(`捕获CK过期通知，开始尝试处理...`);
-            var strPtPin = await GetPtPin(text);
-            var strdecPtPin = decodeURIComponent(strPtPin);
-            var llHaderror = false;
-
-            if (strPtPin) {
-                var temptest = await getEnvByPtPin(strdecPtPin);
-                if (temptest) {
-                    if (temptest.status == 0) {
-                        isLogin = true;
-                        await isLoginByX1a0He(temptest.value);
-                        if (!isLogin) {
-                            const DisableCkBody = await DisableCk(temptest._id);
-                            var strAllNotify = "";
-                            var MessageUserGp2 = "";
-                            var MessageUserGp3 = "";
-                            var MessageUserGp4 = "";
-
-                            var userIndex2 = -1;
-                            var userIndex3 = -1;
-                            var userIndex4 = -1;
-
-                            var strNotifyOneTemp = "";
-                            if ($.isNode() && process.env.BEANCHANGE_USERGP2) {
-                                MessageUserGp2 = process.env.BEANCHANGE_USERGP2 ? process.env.BEANCHANGE_USERGP2.split('&') : [];
-                            }
-
-                            if ($.isNode() && process.env.BEANCHANGE_USERGP3) {
-                                MessageUserGp3 = process.env.BEANCHANGE_USERGP3 ? process.env.BEANCHANGE_USERGP3.split('&') : [];
-                            }
-
-                            if ($.isNode() && process.env.BEANCHANGE_USERGP4) {
-                                MessageUserGp4 = process.env.BEANCHANGE_USERGP4 ? process.env.BEANCHANGE_USERGP4.split('&') : [];
-                            }
-
-                            if (MessageUserGp4) {
-                                userIndex4 = MessageUserGp4.findIndex((item) => item === $.UserName);
-
-                            }
-                            if (MessageUserGp2) {
-                                userIndex2 = MessageUserGp2.findIndex((item) => item === $.UserName);
-                            }
-                            if (MessageUserGp3) {
-                                userIndex3 = MessageUserGp3.findIndex((item) => item === $.UserName);
-                            }
-
-                            if (userIndex2 != -1) {
-                                console.log(`该账号属于分组2`);
-                                text = "京东CK检测#2";
-                            }
-                            if (userIndex3 != -1) {
-                                console.log(`该账号属于分组3`);
-                                text = "京东CK检测#3";
-                            }
-                            if (userIndex4 != -1) {
-                                console.log(`该账号属于分组4`);
-                                text = "京东CK检测#4";
-                            }
-                            if (userIndex4 == -1 && userIndex2 == -1 && userIndex3 == -1) {
-                                text = "京东CK检测";
-                            }
-                            if (process.env.CHECKCK_ALLNOTIFY) {
-                                var strTempNotify = process.env.CHECKCK_ALLNOTIFY ? process.env.CHECKCK_ALLNOTIFY.split('&') : [];
-                                if (strTempNotify.length > 0) {
-                                    for (var TempNotifyl in strTempNotify) {
-                                        strAllNotify += strTempNotify[TempNotifyl] + '\n';
-                                    }
-                                }
-                                console.log(`检测到设定了温馨提示,将在推送信息中置顶显示...`);
-                                strAllNotify = `\n【✨✨✨✨温馨提示✨✨✨✨】\n` + strAllNotify;
-                                console.log(strAllNotify);
-                            }
-
-                            if (DisableCkBody.code == 200) {
-                                console.log(`京东账号` + strdecPtPin + `已失效,自动禁用成功!\n`);
-
-                                strNotifyOneTemp = `京东账号: ` + strdecPtPin + ` 已失效,自动禁用成功!\n如果要继续挂机，请联系管理员重新登录账号，账号有效期为30天.`;
-                                if (strAllNotify)
-                                    strNotifyOneTemp += `\n` + strAllNotify;
-                                desp = strNotifyOneTemp;
-                                if (WP_APP_TOKEN_ONE) {
-                                    await sendNotifybyWxPucher(`账号过期下线通知`, strNotifyOneTemp, strdecPtPin);
-                                }
-
-                            } else {
-                                console.log(`京东账号` + strPtPin + `已失效,自动禁用失败!\n`);
-                                strNotifyOneTemp = `京东账号: ` + strdecPtPin + ` 已失效!\n如果要继续挂机，请联系管理员重新登录账号，账号有效期为30天.`;
-                                if (strAllNotify)
-                                    strNotifyOneTemp += `\n` + strAllNotify;
-                                desp = strNotifyOneTemp;
-                                if (WP_APP_TOKEN_ONE) {
-                                    await sendNotifybyWxPucher(`账号过期下线通知`, strNotifyOneTemp, strdecPtPin);
-                                }
-                            }
-                        } else {
-                            console.log(`该CK已经检测没有有效，跳过通知...`);
-                            llHaderror = true;
-                        }
-                    } else {
-                        console.log(`该CK已经禁用不需要处理`);
-                        llHaderror = true;
-                    }
-
-                }
-
-            } else {
-                console.log(`CK过期通知处理失败...`);
-            }
-            if (llHaderror)
-                return;
-        }
-
-        if (text.indexOf("京东CK检测") != -1 || text == "Ninja 运行通知") {
-
-            if (Notify_CKTask) {
-                console.log("触发CK脚本，开始执行....");
-                Notify_CKTask = "task " + Notify_CKTask + " now";
-                await exec(Notify_CKTask, function (error, stdout, stderr) {
-                    console.log(error, stdout, stderr)
-                });
-            }
-        }
-
-        //检查黑名单屏蔽通知
-        const notifySkipList = process.env.NOTIFY_SKIP_LIST ? process.env.NOTIFY_SKIP_LIST.split('&') : [];
-        let titleIndex = notifySkipList.findIndex((item) => item === text);
-
-=======
         var strtext = text;
         var strdesp = desp;
         if (process.env.NOTIFY_NOCKFALSE) {
@@ -530,7 +372,6 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By cc
         const notifySkipList = process.env.NOTIFY_SKIP_LIST ? process.env.NOTIFY_SKIP_LIST.split('&') : [];
         let titleIndex = notifySkipList.findIndex((item) => item === text);
 
->>>>>>> Stashed changes
         if (titleIndex !== -1) {
             console.log(`${text} 在推送黑名单中，已跳过推送`);
             return;
@@ -1448,11 +1289,7 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By cc
                             text = text.replace(new RegExp(`${$.UserName}|${$.nickName}`, 'gm'), $.Remark);
 
                             if (text == "京东资产变动" || text == "京东资产变动#2" || text == "京东资产变动#3" || text == "京东资产变动#4") {
-<<<<<<< Updated upstream
-                                var Tempinfo = getQLinfo(cookie, envs[i].created, envs[i].timestamp);
-=======
                                 var Tempinfo = getQLinfo(cookie, envs[i].created, envs[i].timestamp, envs[i].remarks);
->>>>>>> Stashed changes
                                 if (Tempinfo) {
                                     $.Remark += Tempinfo;
                                 }
@@ -1546,11 +1383,7 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By cc
             tgBotNotify(text, desp), //telegram 机器人
             ddBotNotify(text, desp), //钉钉机器人
             qywxBotNotify(text, desp), //企业微信机器人
-<<<<<<< Updated upstream
-            qywxamNotify(text, desp), //企业微信应用消息推送
-=======
             qywxamNotify(text, desp,strsummary), //企业微信应用消息推送
->>>>>>> Stashed changes
             iGotNotify(text, desp, params), //iGot
             gobotNotify(text, desp), //go-cqhttp
             gotifyNotify(text, desp), //gotify
@@ -1563,16 +1396,6 @@ function getuuid(strRemark, PtPin) {
     if (strRemark) {
         var Tempindex = strRemark.indexOf("@@");
         if (Tempindex != -1) {
-<<<<<<< Updated upstream
-            console.log("检测到NVJDC的一对一格式,瑞思拜~!");
-            var TempRemarkList = strRemark.split("@@");
-            strTempuuid = TempRemarkList[1];
-        }
-    }
-    if (!strTempuuid && TempCKUid) {
-        for (let j = 0; j < TempCKUid.length; j++) {
-            if (PtPin == TempCKUid[j].pt_pin) {
-=======
             console.log(PtPin+": 检测到NVJDC的一对一格式,瑞思拜~!");
             var TempRemarkList = strRemark.split("@@");
             for (let j = 1; j < TempRemarkList.length; j++) {
@@ -1594,7 +1417,6 @@ function getuuid(strRemark, PtPin) {
         console.log("正在从CK_WxPusherUid文件中检索资料...");
         for (let j = 0; j < TempCKUid.length; j++) {
             if (PtPin == decodeURIComponent(TempCKUid[j].pt_pin)) {
->>>>>>> Stashed changes
                 strTempuuid = TempCKUid[j].Uid;
                 break;
             }
@@ -1603,26 +1425,14 @@ function getuuid(strRemark, PtPin) {
     return strTempuuid;
 }
 
-<<<<<<< Updated upstream
-function getQLinfo(strCK, intcreated, strTimestamp) {
-    var strCheckCK = strCK.match(/pt_key=([^; ]+)(?=;?)/) && strCK.match(/pt_key=([^; ]+)(?=;?)/)[1];
-=======
 function getQLinfo(strCK, intcreated, strTimestamp, strRemark) {
     var strCheckCK = strCK.match(/pt_key=([^; ]+)(?=;?)/) && strCK.match(/pt_key=([^; ]+)(?=;?)/)[1];
 	var strPtPin = decodeURIComponent(strCK.match(/pt_pin=([^; ]+)(?=;?)/) && strCK.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
->>>>>>> Stashed changes
     var strReturn = "";
     if (strCheckCK.substring(0, 4) == "AAJh") {
         var DateCreated = new Date(intcreated);
         var DateTimestamp = new Date(strTimestamp);
         var DateToday = new Date();
-<<<<<<< Updated upstream
-
-        //过期时间
-        var UseDay = Math.ceil((DateToday.getTime() - DateCreated.getTime()) / 86400000);
-        var LogoutDay = 30 - Math.ceil((DateToday.getTime() - DateTimestamp.getTime()) / 86400000);
-        if (LogoutDay < 1 ) {
-=======
         if (strRemark) {
             var Tempindex = strRemark.indexOf("@@");
             if (Tempindex != -1) {
@@ -1643,7 +1453,6 @@ function getQLinfo(strCK, intcreated, strTimestamp, strRemark) {
         var UseDay = Math.ceil((DateToday.getTime() - DateCreated.getTime()) / 86400000);
         var LogoutDay = 30 - Math.ceil((DateToday.getTime() - DateTimestamp.getTime()) / 86400000);
         if (LogoutDay < 1) {
->>>>>>> Stashed changes
             strReturn = "\n【登录信息】已服务" + UseDay + "天(登录状态即将到期，请重新登录)"
         } else {
             strReturn = "\n【登录信息】已服务" + UseDay + "天(有效期约剩" + LogoutDay + "天)"
@@ -1718,11 +1527,7 @@ async function sendNotifybyWxPucher(text, desp, PtPin, author = '\n\n本通知 B
                             //额外处理1，nickName包含星号
                             $.nickName = $.nickName.replace(new RegExp(`[*]`, 'gm'), "[*]");
 
-<<<<<<< Updated upstream
-                            var Tempinfo = getQLinfo(cookie, tempEnv.created, tempEnv.timestamp);
-=======
                             var Tempinfo = getQLinfo(cookie, tempEnv.created, tempEnv.timestamp, tempEnv.remarks);
->>>>>>> Stashed changes
                             if (Tempinfo) {
                                 Tempinfo = $.nickName + Tempinfo;
                                 desp = desp.replace(new RegExp(`${$.UserName}|${$.nickName}`, 'gm'), Tempinfo);
@@ -1747,11 +1552,7 @@ async function sendNotifybyWxPucher(text, desp, PtPin, author = '\n\n本通知 B
                     }
                     console.log("处理完成，开始发送通知...");
                     desp = buildLastDesp(desp, author);
-<<<<<<< Updated upstream
-                    await wxpusherNotifyByOne(text, desp,strsummary);
-=======
                     await wxpusherNotifyByOne(text, desp, strsummary);
->>>>>>> Stashed changes
                 } else {
                     console.log("未查询到用户的Uid,取消一对一通知发送...");
                 }
@@ -2195,11 +1996,7 @@ function ChangeUserId(desp) {
     }
 }
 
-<<<<<<< Updated upstream
-function qywxamNotify(text, desp) {
-=======
 function qywxamNotify(text, desp, strsummary="") {
->>>>>>> Stashed changes
     return new Promise((resolve) => {
         if (QYWX_AM) {
             const QYWX_AM_AY = QYWX_AM.split(',');
@@ -2217,12 +2014,9 @@ function qywxamNotify(text, desp, strsummary="") {
             $.post(options_accesstoken, (err, resp, data) => {
                 html = desp.replace(/\n/g, '<br/>');
                 html = `<font size="3">${html}</font>`;
-<<<<<<< Updated upstream
-=======
                 if (strsummary=="") {
                     strsummary = desp;
                 }
->>>>>>> Stashed changes
                 var json = JSON.parse(data);
                 accesstoken = json.access_token;
                 let options;
@@ -2233,11 +2027,7 @@ function qywxamNotify(text, desp, strsummary="") {
                         msgtype: 'textcard',
                         textcard: {
                             title: `${text}`,
-<<<<<<< Updated upstream
-                            description: `${desp}`,
-=======
                             description: `${strsummary}`,
->>>>>>> Stashed changes
                             url: 'https://github.com/whyour/qinglong',
                             btntxt: '更多',
                         },
@@ -2263,11 +2053,7 @@ function qywxamNotify(text, desp, strsummary="") {
                                     author: `智能助手`,
                                     content_source_url: ``,
                                     content: `${html}`,
-<<<<<<< Updated upstream
-                                    digest: `${desp}`,
-=======
                                     digest: `${strsummary}`,
->>>>>>> Stashed changes
                                 }, ],
                         },
                     };
@@ -2473,11 +2259,7 @@ function wxpusherNotifyByOne(text, desp, strsummary = "") {
             }
 
             if (strsummary.length > 96) {
-<<<<<<< Updated upstream
-                strsummary = strsummary.substring(0, 95);
-=======
                 strsummary = strsummary.substring(0, 95)+"...";
->>>>>>> Stashed changes
             }
             let uids = [];
             for (let i of WP_UIDS_ONE.split(";")) {
@@ -2485,10 +2267,6 @@ function wxpusherNotifyByOne(text, desp, strsummary = "") {
                     uids.push(i);
             };
             let topicIds = [];
-<<<<<<< Updated upstream
-            desp = `<font size="4"><strong>${text}</strong></font>\n\n<font size="3">${desp}</font>`;
-            desp = desp.replace(/[\n\r]/g, '<br>'); // 默认为html, 不支持plaintext
-=======
 
             //desp = `<font size="3">${desp}</font>`;
             desp = desp.replace(/[\n\r]/g, '<br>'); // 默认为html, 不支持plaintext
@@ -2523,7 +2301,6 @@ function wxpusherNotifyByOne(text, desp, strsummary = "") {
         </section>
     </section>
 </section>`;
->>>>>>> Stashed changes
 
             const body = {
                 appToken: `${WP_APP_TOKEN_ONE}`,
