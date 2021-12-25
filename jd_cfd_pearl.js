@@ -565,7 +565,7 @@ function getUrlQueryParams(url_string, param) {
 
 
 
-function getAuthorShareCode(url) {
+function getAuthorShareCode1(url) {
   return new Promise(async resolve => {
     const options = {
       "url": `${url}?${new Date()}`,
