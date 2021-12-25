@@ -64,6 +64,10 @@ const JD_API_HOST = 'https://wq.jd.com/fav';
       await requireConfig();
       await jdUnsubscribe();
       await showMsg();
+<<<<<<< Updated upstream
+=======
+	  await $.wait(3 * 1000);
+>>>>>>> Stashed changes
     }
   }
 })()

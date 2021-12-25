@@ -24,7 +24,11 @@ const $ = new Env('京东赚赚');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+<<<<<<< Updated upstream
 let helpAuthor = false; // 帮助作者
+=======
+let helpAuthor = true; // 帮助作者
+>>>>>>> Stashed changes
 const randomCount = $.isNode() ? 20 : 5;
 let jdNotify = true; // 是否关闭通知，false打开通知推送，true关闭通知推送
 //IOS等用户直接用NobyDa的jd cookie
@@ -39,7 +43,14 @@ if ($.isNode()) {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
+<<<<<<< Updated upstream
 const inviteCodes = []
+=======
+const inviteCodes = [
+  `S9KUiH11Mq1bSKBo@S5KkcRh9P9FbRKUygl_UJcg@StvV3SBcQ8Vw@S5KkcEV9ThDGWdWGw0K5u@S5KkcRktN8lyBdEj1kaQMdw@Sa3LolJe5IPhP9aNJQlGD@S5KkcR0pM91aBIhmgxf9bcA@S5KkcREwR_VXRIB78kvRYcg@S5KkcRE8b9QGEIEz0nKRbJw`,
+  `S9KUiH11Mq1bSKBo@S5KkcRh9P9FbRKUygl_UJcg@StvV3SBcQ8Vw@S5KkcEV9ThDGWdWGw0K5u@S5KkcRktN8lyBdEj1kaQMdw@Sa3LolJe5IPhP9aNJQlGD@S5KkcR0pM91aBIhmgxf9bcA@S5KkcREwR_VXRIB78kvRYcg@S5KkcRE8b9QGEIEz0nKRbJw`,
+]
+>>>>>>> Stashed changes
 let nowTimes = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000);
 !(async () => {
   await requireConfig();
@@ -225,11 +236,19 @@ async function helpFriends() {
 function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
+<<<<<<< Updated upstream
     $.get({url: ``, 'timeout': 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} 已清除 sgh`)
+=======
+    $.get({url: `https://code.chiang.fun/api/v1/jd/jdzz/read/${randomCount}/`, 'timeout': 10000}, (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+>>>>>>> Stashed changes
         } else {
           if (data) {
             console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
