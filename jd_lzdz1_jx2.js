@@ -33,12 +33,6 @@ if (process.env.NO_RUSH && process.env.NO_RUSH != "") {
         return;
     }
     
-    authorCodeList = await getAuthorCodeList('https://raw.githubusercontent.com/leastfrog/updateTeam/master/shareCodes/lzdz1_jx.json')
-    if($.getAuthorCodeListerr === false){
-        authorCodeList = [
-            '82dfdf0a0fba462493b746e70d4bb572',
-        ]
-    }
 
     for (let i = 0; i < cookiesArr.length; i++) {
         if (cookiesArr[i]) {
@@ -61,10 +55,10 @@ if (process.env.NO_RUSH && process.env.NO_RUSH != "") {
             $.bean = 0;
             $.ADID = getUUID('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', 1);
             $.UUID = getUUID('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-            // authorCodeList = [
-            //     '2a950a42a8d146a38efb24654a7c1390',
-            // ]
-            // $.authorCode = authorCodeList[random(0, authorCodeList.length)]
+            authorCodeList = [
+                '82dfdf0a0fba462493b746e70d4bb572',
+            ]
+            $.authorCode = authorCodeList[random(0, authorCodeList.length)]
             $.authorCode = ownCode ? ownCode : authorCodeList[random(0, authorCodeList.length)]
             $.authorNum = `${random(1000000, 9999999)}`
             $.randomCode = random(1000000, 9999999)
