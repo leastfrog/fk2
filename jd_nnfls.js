@@ -64,7 +64,7 @@ if ($.isNode()) {
         $.indexA = i + 1;
         $.canHelp = true;
         $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
-        console.log(`====开始账号【${$.indexA}】${$.UserName}===助力`)
+        console.log(`====开始【账号${$.indexA}】${$.UserName}===助力`)
         if (rcsArr.includes($.UserName) > 0) {
             console.log("不让助力，休息会！");
             break;
@@ -82,7 +82,7 @@ if ($.isNode()) {
         $.cookie = cookiesArr[i];
         $.indexB = i + 1;
         $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
-        console.log(`====开始账号【${$.indexB}】${$.UserName}===`)
+        console.log(`====开始【账号${$.indexB}】${$.UserName}===`)
         if (rcsArr.includes($.UserName) > 0) {
             console.log("不让做任务，休息会！");
             continue;
