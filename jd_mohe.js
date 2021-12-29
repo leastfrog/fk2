@@ -1,4 +1,4 @@
-/*
+，。/*
 5G超级盲盒，可抽奖获得京豆，建议在凌晨0点时运行脚本，白天抽奖基本没有京豆，4小时运行一次收集热力值
 活动地址: https://blindbox5g.jd.com
 活动时间：2021-06-2到2021-07-31
@@ -47,11 +47,6 @@ $.shareId = [];
       '活动地址: https://blindbox5g.jd.com\n' +
       '活动时间：2021-8-2到2021-10-29\n' +
       '更新时间：2021-8-8 19:00');
-  $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常 sgh', e));
-//  await $.wait(1000)
-  await updateShareCodesCDN('')
-//  await $.wait(1000)
-  await getShareCode()
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -444,7 +439,7 @@ function updateShareCodesCDN(url) {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
-          $.updatePkActivityIdRes = JSON.parse(data);
+          $.updatePkActivityIdRes = []
         }
       } catch (e) {
         $.logErr(e, resp)
@@ -458,7 +453,7 @@ function updateShareCodesCDN(url) {
 function getShareCode() {
   return new Promise(resolve => {
     $.get({
-      url: "https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/jd_mohe.json",
+      url: "",
       headers: {
         "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
       }
@@ -466,7 +461,7 @@ function getShareCode() {
       try {
         if (err) {
         } else {
-          $.zero205Code = JSON.parse(data) || []
+          $.zero205Code = []
         }
       } catch (e) {
         $.logErr(e, resp)
