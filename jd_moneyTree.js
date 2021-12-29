@@ -135,9 +135,9 @@ function user_info() {
                    console.log(`助力码sharePin为：：${userInfo.sharePin}`);
                   $.treeMsgTime = userInfo.sharePin;
                   subTitle = `【${userInfo.nick}】${userInfo.treeInfo.treeName}`;
-                   message += `【我的金果数量】${userInfo.treeInfo.fruit}\n`;
-                   message += `【我的金币数量】${userInfo.treeInfo.coin}\n`;
-                   message += `【距离${userInfo.treeInfo.level + 1}级摇钱树还差】${userInfo.treeInfo.progressLeft}\n`;
+                  // message += `【我的金果数量】${userInfo.treeInfo.fruit}\n`;
+                  // message += `【我的金币数量】${userInfo.treeInfo.coin}\n`;
+                  // message += `【距离${userInfo.treeInfo.level + 1}级摇钱树还差】${userInfo.treeInfo.progressLeft}\n`;
                 } else {
                   $.log(`京东账号${$.index}${$.UserName}运行失败\n此账号未实名认证或者未参与过此活动\n①如未参与活动,请先去京东app参加摇钱树活动\n入口：我的->游戏与互动->查看更多\n②如未实名认证,请进行实名认证`)
                   // $.msg($.name, `【提示】京东账号${$.index}${$.UserName}运行失败`, '此账号未实名认证或者未参与过此活动\n①如未参与活动,请先去京东app参加摇钱树活动\n入口：我的->游戏与互动->查看更多\n②如未实名认证,请进行实名认证', {"open-url": "openApp.jdMobile://"});
@@ -185,7 +185,7 @@ function dayWork() {
       }
     };
     let response = await request('dayWork', data);
-     console.log(`获取任务的信息:${JSON.stringify(response)}\n`)
+    // console.log(`获取任务的信息:${JSON.stringify(response)}\n`)
     let canTask = [];
     taskInfo = [];
     if (response && response.resultCode === 0) {
@@ -208,9 +208,9 @@ function dayWork() {
     console.log(`浏览任务列表taskInfo::${JSON.stringify(taskInfo)}\n`)
     for (let item of canTask) {
       if (item.workType === 1) {
-          签到任务
-         let signRes = await sign();
-         console.log(`签到结果:${JSON.stringify(signRes)}`);
+        //  签到任务
+        // let signRes = await sign();
+        // console.log(`签到结果:${JSON.stringify(signRes)}`);
         if (item.workStatus === 0) {
           // const data = {"source":2,"workType":1,"opType":2};
           // let signRes = await request('doWork', data);
@@ -290,14 +290,14 @@ function harvest() {
       // gen.next();
     })
   })
-   request('harvest', data).then((harvestRes) => {
-     if (harvestRes.resultCode === 0 && harvestRes.resultData.code === '200') {
-       let data = harvestRes.resultData.data;
-       message += `【距离${data.treeInfo.level + 1}级摇钱树还差】${data.treeInfo.progressLeft}\n`;
-       fruitTotal = data.treeInfo.fruit;
-       gen.next();
-     }
-   })
+  // request('harvest', data).then((harvestRes) => {
+  //   if (harvestRes.resultCode === 0 && harvestRes.resultData.code === '200') {
+  //     let data = harvestRes.resultData.data;
+  //     message += `【距离${data.treeInfo.level + 1}级摇钱树还差】${data.treeInfo.progressLeft}\n`;
+  //     fruitTotal = data.treeInfo.fruit;
+  //     gen.next();
+  //   }
+  // })
 }
 
 //卖出金果，得到金币
@@ -544,10 +544,10 @@ async function setUserLinkStatus(missionId) {
     }
     let response = await request('setUserLinkStatus', params)
     console.log(`missionId为${missionId}：：第${index + 1}次浏览活动完成: ${JSON.stringify(response)}`);
-     if (resultCode === 0) {
-       let sportRevardResult = await getSportReward();
-       console.log(`领取遛狗奖励完成: ${JSON.stringify(sportRevardResult)}`);
-     }
+    // if (resultCode === 0) {
+    //   let sportRevardResult = await getSportReward();
+    //   console.log(`领取遛狗奖励完成: ${JSON.stringify(sportRevardResult)}`);
+    // }
     index++;
   } while (index < 7) //不知道结束的条件，目前写死循环7次吧
   console.log('浏览店铺任务结束');
