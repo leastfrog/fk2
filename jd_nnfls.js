@@ -61,9 +61,10 @@ if ($.isNode()) {
     }
     for (let i = 0; i < cookiesArr.length; i++) {
         $.cookie = cookiesArr[i];
+        $.indexA = i + 1;
         $.canHelp = true;
         $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
-        console.log(`====开始账号${$.UserName}===助力`)
+        console.log(`====开始账号【${$.indexA}】${$.UserName}===助力`)
         if (rcsArr.includes($.UserName) > 0) {
             console.log("不让助力，休息会！");
             break;
@@ -79,8 +80,9 @@ if ($.isNode()) {
     console.log(`\n********执行任务抽奖**********\n`);
     for (let i = 0; i < cookiesArr.length; i++) {
         $.cookie = cookiesArr[i];
+        $.indexB = i + 1;
         $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
-        console.log(`====开始账号${$.UserName}===`)
+        console.log(`====开始账号【${$.indexB}】${$.UserName}===`)
         if (rcsArr.includes($.UserName) > 0) {
             console.log("不让做任务，休息会！");
             continue;
@@ -103,7 +105,7 @@ function getShareCode(name, author = '', num = -1, shuffle = false) {
                     console.log(`${JSON.stringify(err)}`);
                     console.log(`${$.name} 已清除 sgh`);
                 } else {
-                    console.log(`优先账号内部互助，有剩余助力次数再帮作者助力`);
+                    console.log(`账号内部互助，注意：有剩余助力次数帮作者助力`);
                     $.shareCode = [] //JSON.parse(data) || []
                 }
             } catch (e) {
