@@ -85,7 +85,7 @@ const JD_API_HOST = `https://api.m.jd.com`;
             }
         }
         if (new Date().getHours() >= 10) {
-            await getAuthorShareCode()
+            //await getAuthorShareCode()
             if ($.authorCode && $.authorCode.length) {
                 console.log(`\n${$.UserName} 去助力\n`)
                 for (let j = 0; j < $.authorCode.length; j++) {
@@ -308,9 +308,9 @@ function getAuthorShareCode() {
             try {
                 if (err) {
                     console.log(`${JSON.stringify(err)}`);
-                    console.log(`${$.name} 获取作者助力码失败 by Sgh，请检查网路重试`);
+                    console.log(`${$.name} 获取作者助力码失败 by Sgh`);
                 } else {
-                    $.authorCode = JSON.parse(data);
+                    //$.authorCode = JSON.parse(data);
                 }
             } catch (e) {
                 $.logErr(e, resp)
