@@ -115,7 +115,7 @@ function user_info() {
     }
   }
   params.riskDeviceParam = JSON.stringify(params.riskDeviceParam);
-   await $.wait(5000); //歇口气儿, 不然会报操作频繁
+  // await $.wait(5000); //歇口气儿, 不然会报操作频繁
   return new Promise((resolve, reject) => {
     $.post(taskurl('login', params), async (err, resp, data) => {
       try {
