@@ -31,7 +31,7 @@ if ($.isNode()) {
 
 const JD_API_HOST = `https://api.m.jd.com/client.action`;
 message = ""
-$.shareuuid = "7eaf779f13f64e2cbb2b1a55fd1de09f" //
+$.shareuuid = "ee5510c1f47242a8b7be916ff7800882" //
     !(async () => {
         console.log(`入口：21.0复制整段话 Http:/JnE0bflXQPzN4R 伊利云养一头牛，赢1分钱得牛奶一提！坚持打卡~每日多个好礼相送哟！快来云养的牛宝宝吧！#f1EQN5nQJa%去【椋〣崬】\n`)
         if (!cookiesArr[0]) {
@@ -178,7 +178,7 @@ function getToken2() {
 //抄的书店的 不过不加好像也能进去
 function getActCk() {
     return new Promise(resolve => {
-        $.get(taskUrl("/dingzhi/yili/yangniu/activity", `activityId=dz2103100001340201&shareUuid=bd93957c016242f6a51194d35449432c&adsource=ziying&shareuserid4minipg=u/cWHIy7/x3Ij+HjfbnnePkaL5GGqMTUc8u/otw2E+a7Ak3lgFoFQlZmf45w8Jzw&shopid=1000013402&lng=114.062541&lat=29.541254&sid=eec1865d9c44c1070f3b5e6718c9ee1w&un_area=4_48201_54794_0`), (err, resp, data) => {
+        $.get(taskUrl("/dingzhi/yili/yangniu/activity", `activityId=dz2103100001340201&shareUuid=ee5510c1f47242a8b7be916ff7800882&adsource=ziying&shareuserid4minipg=u/cWHIy7/x3Ij+HjfbnnePkaL5GGqMTUc8u/otw2E+a7Ak3lgFoFQlZmf45w8Jzw&shopid=1000013402&lng=114.062541&lat=29.541254&sid=eec1865d9c44c1070f3b5e6718c9ee1w&un_area=4_48201_54794_0`), (err, resp, data) => {
             try {
                 if (err) {
                     console.log(`${$.name} API请求失败，请检查网路重试`)
@@ -517,7 +517,7 @@ function taskUrl(url, body) {
             'Host': 'lzdz-isv.isvjcloud.com',
             'Accept': 'application/json',
             //     'X-Requested-With': 'XMLHttpRequest',
-            'Referer': 'https://lzdz-isv.isvjcloud.com/dingzhi/yili/yangniu/activity/4827909?activityId=dz2103100001340201&shareUuid=b44243656a694b6f94bb30a4a5f2a45d&adsource=ziying&shareuserid4minipg=5Iufa9rY657S3OP3PLSpK07oeVP9kq2pYSH90mYt4m3fwcJlClpxrfmVYaGKuquQkdK3rLBQpEQH9V4tdrrh0w==&shopid=1000013402&lng=114.062604&lat=29.541501&sid=6e9bfee3838075a72533536815d8f3ew&un_area=4_48201_54794_0',
+            'Referer': 'https://lzdz-isv.isvjcloud.com/dingzhi/yili/yangniu/activity/4827909?activityId=dz2103100001340201&shareUuid=ee5510c1f47242a8b7be916ff7800882&adsource=ziying&shareuserid4minipg=5Iufa9rY657S3OP3PLSpK07oeVP9kq2pYSH90mYt4m3fwcJlClpxrfmVYaGKuquQkdK3rLBQpEQH9V4tdrrh0w==&shopid=1000013402&lng=114.062604&lat=29.541501&sid=6e9bfee3838075a72533536815d8f3ew&un_area=4_48201_54794_0',
             'user-agent': 'jdapp;android;10.0.4;11;2393039353533623-7383235613364343;network/wifi;model/Redmi K30;addressid/138549750;aid/290955c2782e1c44;oaid/b30cf82cacfa8972;osVer/30;appBuild/88641;partner/xiaomi001;eufv/1;jdSupportDarkMode/0;Mozilla/5.0 (Linux; Android 11; Redmi K30 Build/RKQ1.200826.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045537 Mobile Safari/537.36',
             'content-type': 'application/x-www-form-urlencoded',
             'Cookie': `${cookie} IsvToken=${$.IsvToken};AUTH_C_USER=${$.pin}`,
@@ -537,7 +537,7 @@ function taskPostUrl(url, body) {
             'X-Requested-With': 'XMLHttpRequest',
             
 
-            'Referer': 'https://lzdz-isv.isvjcloud.com/dingzhi/yili/yangniu/activity/4827909?activityId=dz2103100001340201&shareUuid=b44243656a694b6f94bb30a4a5f2a45d&adsource=ziying&shareuserid4minipg=5Iufa9rY657S3OP3PLSpK07oeVP9kq2pYSH90mYt4m3fwcJlClpxrfmVYaGKuquQkdK3rLBQpEQH9V4tdrrh0w==&shopid=1000013402&lng=114.062604&lat=29.541501&sid=6e9bfee3838075a72533536815d8f3ew&un_area=4_48201_54794_0',
+            'Referer': 'https://lzdz-isv.isvjcloud.com/dingzhi/yili/yangniu/activity/4827909?activityId=dz2103100001340201&shareUuid=ee5510c1f47242a8b7be916ff7800882&adsource=ziying&shareuserid4minipg=5Iufa9rY657S3OP3PLSpK07oeVP9kq2pYSH90mYt4m3fwcJlClpxrfmVYaGKuquQkdK3rLBQpEQH9V4tdrrh0w==&shopid=1000013402&lng=114.062604&lat=29.541501&sid=6e9bfee3838075a72533536815d8f3ew&un_area=4_48201_54794_0',
             'user-agent': 'jdapp;android;10.0.4;11;2393039353533623-7383235613364343;network/wifi;model/Redmi K30;addressid/138549750;aid/290955c2782e1c44;oaid/b30cf82cacfa8972;osVer/30;appBuild/88641;partner/xiaomi001;eufv/1;jdSupportDarkMode/0;Mozilla/5.0 (Linux; Android 11; Redmi K30 Build/RKQ1.200826.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045537 Mobile Safari/537.36',
             'content-type': 'application/x-www-form-urlencoded',
             'Cookie': `${cookie} IsvToken=${$.IsvToken};AUTH_C_USER=${$.pin};${$.lz_jdpin_token}`,
