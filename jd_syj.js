@@ -46,9 +46,15 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
-  $.authorTuanList = [];
-  const temp = []
+  $.authorTuanList = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jd_zz.json');
+  if (!$.authorTuanList) {
+    $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_zz.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+    await $.wait(1000)
+    $.authorTuanList = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_zz.json') || [];
+  }
+  const temp = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/jd_zz.json') || []
   $.authorTuanList = [...$.authorTuanList,...temp]
+  // await getRandomCode();
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -392,16 +398,16 @@ function vviptask_reach_task(taskIdEncrypted) {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
-           console.log(`做任务任务:${data}`)
-           if (safeGet(data)) {
-             data = JSON.parse(data);
-             if (data['success']) {
-               $.taskData = data['data'];
-               for (let item of $.taskData) {
-          
-               }
-             }
-           }
+          // console.log(`做任务任务:${data}`)
+          // if (safeGet(data)) {
+          //   data = JSON.parse(data);
+          //   if (data['success']) {
+          //     $.taskData = data['data'];
+          //     for (let item of $.taskData) {
+          //
+          //     }
+          //   }
+          // }
         }
       } catch (e) {
         $.logErr(e, resp)
@@ -435,16 +441,16 @@ function vviptask_reward_receive(idEncKey) {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
-           console.log(`做任务任务:${data}`)
-           if (safeGet(data)) {
-             data = JSON.parse(data);
-             if (data['success']) {
-               $.taskData = data['data'];
-               for (let item of $.taskData) {
-          
-               }
-             }
-           }
+          // console.log(`做任务任务:${data}`)
+          // if (safeGet(data)) {
+          //   data = JSON.parse(data);
+          //   if (data['success']) {
+          //     $.taskData = data['data'];
+          //     for (let item of $.taskData) {
+          //
+          //     }
+          //   }
+          // }
         }
       } catch (e) {
         $.logErr(e, resp)
@@ -553,27 +559,27 @@ async function distributeBeanActivity() {
     }
     if ($.tuan && $.tuan.hasOwnProperty('assistedPinEncrypted') && $.assistStatus !== 3) {
       $.tuanList.push($.tuan);
-       const code = Object.assign($.tuan, {"time": Date.now()});
-       $.http.post({
-         url: `http://go.chiang.fun/autocommit`,
-         headers: { "Content-Type": "application/json" },
-         body: JSON.stringify({ "act": "zuan", code }),
-         timeout: 30000
-       }).then((resp) => {
-         if (resp.statusCode === 200) {
-           try {
-             let { body } = resp;
-             body = JSON.parse(body);
-             if (body['code'] === 200) {
-               console.log(`\n【京东账号${$.index}（${$.nickName || $.UserName}）的【赚京豆-瓜分京豆】好友互助码提交成功\n`)
-             } else {
-               console.log(`【赚京豆-瓜分京豆】邀请码提交失败:${JSON.stringify(body)}\n`)
-             }
-           } catch (e) {
-             console.log(`【赚京豆-瓜分京豆】邀请码提交异常:${e}`)
-           }
-         }
-       }).catch((e) => console.log(`【赚京豆-瓜分京豆】邀请码提交异常:${e}`));
+      // const code = Object.assign($.tuan, {"time": Date.now()});
+      // $.http.post({
+      //   url: `http://go.chiang.fun/autocommit`,
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ "act": "zuan", code }),
+      //   timeout: 30000
+      // }).then((resp) => {
+      //   if (resp.statusCode === 200) {
+      //     try {
+      //       let { body } = resp;
+      //       body = JSON.parse(body);
+      //       if (body['code'] === 200) {
+      //         console.log(`\n【京东账号${$.index}（${$.nickName || $.UserName}）的【赚京豆-瓜分京豆】好友互助码提交成功\n`)
+      //       } else {
+      //         console.log(`【赚京豆-瓜分京豆】邀请码提交失败:${JSON.stringify(body)}\n`)
+      //       }
+      //     } catch (e) {
+      //       console.log(`【赚京豆-瓜分京豆】邀请码提交异常:${e}`)
+      //     }
+      //   }
+      // }).catch((e) => console.log(`【赚京豆-瓜分京豆】邀请码提交异常:${e}`));
     }
   } catch (e) {
     $.logErr(e);
@@ -724,7 +730,26 @@ function getAuthorShareCode(url) {
     })
   })
 }
-
+async function getRandomCode() {
+  await $.http.get({url: `http://go.chiang.fun/read/zuan/${randomCount}`, timeout: 10000}).then(async (resp) => {
+    if (resp.statusCode === 200) {
+      try {
+        let { body } = resp;
+        body = JSON.parse(body);
+        if (body && body['code'] === 200) {
+          console.log(`随机取【赚京豆-瓜分京豆】${randomCount}个邀请码成功\n`);
+          $.body = body['data'];
+          $.body1 = [];
+          $.body.map(item => {
+            $.body1.push(JSON.parse(item));
+          })
+        }
+      } catch (e) {
+        console.log(`随机取【赚京豆-瓜分京豆】${randomCount}个邀请码异常:${e}`);
+      }
+    }
+  }).catch((e) => console.log(`随机取【赚京豆-瓜分京豆】${randomCount}个邀请码异常:${e}`));
+}
 //======================赚京豆开团===========END=====
 function taskUrl(function_id, body = {}) {
   return {
