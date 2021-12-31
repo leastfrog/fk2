@@ -216,13 +216,12 @@ function shareCodesFormat() {
   return new Promise(async resolve => {
     $.newShareCodes = [];
     let inviteCodes = [
-      'RIxPIOnSKiDhVcdgX7LvPg@iGBnlkHmUZMEBGXASi_VjMAdoUJQ3Dik@4JRERA4EOLkSEMqTeNdtGw@RxnoGLOsKxpRFWYJEqQSAA',
-      'RIxPIOnSKiDhVcdgX7LvPg@iGBnlkHmUZMEBGXASi_VjMAdoUJQ3Dik@4JRERA4EOLkSEMqTeNdtGw@RxnoGLOsKxpRFWYJEqQSAA'
+    	''
     ];
     if ($.shareCodesArr[$.index - 1]) {
       $.newShareCodes = $.shareCodesArr[$.index - 1].split('@');
     } else {
-      console.log(`由于您第${$.index}个京东账号未提供shareCode,将为本脚本作者【leastfrog】助力\n`)
+      console.log(`由于您第${$.index}个京东账号未提供shareCode,将为本脚本作者【zero205】助力\n`)
       const tempIndex = $.index > inviteCodes.length ? (inviteCodes.length - 1) : ($.index - 1);
       $.newShareCodes = inviteCodes[tempIndex].split('@');
     }

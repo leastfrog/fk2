@@ -5,7 +5,7 @@
  -----------------
  Update: 2021-11-17  修复任务
  -----------------
-内部助力
+先内部助力，有剩余助力作者
  cron 1 0,19,23 * * * https://raw.githubusercontent.com/ZXX2021/jd-scripts/main/jd_nnfls.js
  */
 const $ = new Env('牛牛福利');
@@ -61,10 +61,9 @@ if ($.isNode()) {
     }
     for (let i = 0; i < cookiesArr.length; i++) {
         $.cookie = cookiesArr[i];
-        $.indexA = i + 1;
         $.canHelp = true;
         $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
-        console.log(`====开始【账号${$.indexA}】${$.UserName}===助力`)
+        console.log(`====开始账号${$.UserName}===助力`)
         if (rcsArr.includes($.UserName) > 0) {
             console.log("不让助力，休息会！");
             break;
@@ -80,9 +79,8 @@ if ($.isNode()) {
     console.log(`\n********执行任务抽奖**********\n`);
     for (let i = 0; i < cookiesArr.length; i++) {
         $.cookie = cookiesArr[i];
-        $.indexB = i + 1;
         $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
-        console.log(`====开始【账号${$.indexB}】${$.UserName}===`)
+        console.log(`====开始账号${$.UserName}===`)
         if (rcsArr.includes($.UserName) > 0) {
             console.log("不让做任务，休息会！");
             continue;
@@ -95,7 +93,7 @@ if ($.isNode()) {
 function getShareCode(name, author = '', num = -1, shuffle = false) {
     return new Promise(resolve => {
         $.get({
-            url: ``,
+            url: `https://raw.fastgit.org/${author}/updateTeam/main/shareCodes/${name}`,
             headers: {
                 "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
             }
@@ -103,10 +101,16 @@ function getShareCode(name, author = '', num = -1, shuffle = false) {
             try {
                 if (err) {
                     console.log(`${JSON.stringify(err)}`);
-                    console.log(`${$.name} 已清除 sgh`);
+                    console.log(`${$.name} API请求失败，请检查网路重试`);
                 } else {
-                    console.log(`账号内部互助，注意：有剩余助力次数帮作者助力`);
-                    $.shareCode = [] //JSON.parse(data) || []
+                    console.log(`优先账号内部互助，有剩余助力次数再帮作者助力`);
+                    $.shareCode = JSON.parse(data) || []
+                    if (shuffle) {
+                        $.shareCode = $.shareCode.sort(() => 0.5 - Math.random())
+                    }
+                    if (num != -1) {
+                        $.shareCode = $.shareCode.slice(0, num)
+                    }
                 }
             } catch (e) {
                 $.logErr(e, resp)
