@@ -25,7 +25,7 @@ guaopenwait93="0"
 
 All变量适用
 ————————————————
-入口：[ 1.6～1.31 会员狂欢日 (https://lzdz1-isv.isvjcloud.com/dingzhi/majorsuit/memberday/activity?activityId=dz2112100022468201&shareUuid=ca650078f09d43be8d535f36712ab9f2)]
+入口：[ 1.6～1.31 会员狂欢日 (https://lzdz1-isv.isvjcloud.com/dingzhi/majorsuit/memberday/activity?activityId=dz2112100022468201&shareUuid=${$.shareUuid})]
 
 请求太频繁会被黑ip
 过10分钟再执行
@@ -273,7 +273,7 @@ async function takePostRequest(type) {
   switch (type) {
     case 'isvObfuscator':
       url = `https://api.m.jd.com/client.action?functionId=isvObfuscator`;
-      body = `body=%7B%22url%22%3A%22https%3A//lzdz1-isv.isvjcloud.com%22%2C%22id%22%3A%22%22%7D&uuid=7088d9018515b8cb0c88ace6e5479762af3e88f3&client=apple&clientVersion=10.1.4&st=1634343624086&sv=120&sign=8b9cea22c3a0d77026abda5d37d2b7e3`;
+      body = `body=%7B%22url%22%3A%22https%3A//lzdz1-isv.isvjcloud.com%22%2C%22id%22%3A%22%22%7D&uuid=88888&client=apple&clientVersion=10.1.4&st=1634343624086&sv=120&sign=8b9cea22c3a0d77026abda5d37d2b7e3`;
       break;
       case 'getSimpleActInfoVo':
         url = `${domain}/dz/common/getSimpleActInfoVo`;
