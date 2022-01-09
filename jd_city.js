@@ -1,3 +1,4 @@
+@@ -0,0 +1,419 @@
 /*
 城城领现金
 
@@ -279,47 +280,6 @@ function readShareCode(num=3) {
 }
 //格式化助力码
 function shareCodesFormat() {
-<<<<<<< HEAD
-     return new Promise(async resolve => {
-           console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-          $.newShareCodes = []
-          // const readShareCodeRes = await readShareCode(3);
-          // if (readShareCodeRes && readShareCodeRes.code === 200) {
-          //   pool = readShareCodeRes.data || [];
-          // }
-          if ($.isNode()) {
-               if (process.env.JD_CITY_EXCHANGE) {
-                    exchangeFlag = process.env.JD_CITY_EXCHANGE || exchangeFlag;
-               }
-               if (process.env.CITY_SHARECODES) {
-                    console.log('检测到助力码,优先. 内部互助0.01了吧,删了吧.')
-                    if (process.env.CITY_SHARECODES.indexOf('\n') > -1) {
-                         $.newShareCodes = process.env.CITY_SHARECODES.split('\n');
-                    } else {
-                         $.newShareCodes = process.env.CITY_SHARECODES.split('&');
-                    }
-               }
-          }
-          // if ($.index - 1 == 0) {
-          //   console.log('首个帐号,助力作者和池子')
-          //   $.newShareCodes = [...new Set([...$.newShareCodes,...author_codes, ...pool])];
-          // } else {
-          //   console.log('非首个个帐号,优先向前助力')
-          //   $.newShareCodes = [...new Set([...$.newShareCodes,...self_code,...author_codes, ...pool])]
-          // }
-          if ($.index == 1) {
-               console.log('首个帐号,助力作者和池子')
-               $.newShareCodes = [...new Set([...author_codes, ...pool, ...$.newShareCodes])]
-          } else {
-               // console.log('非首个帐号,助力池子')
-               // $.newShareCodes = [...new Set([...$.newShareCodes,...pool])]
-               console.log('非首个个帐号,优先向前助力')
-               $.newShareCodes = [...new Set([...$.newShareCodes, ...self_code, ...author_codes])]
-          }
-          console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify($.newShareCodes)}`)
-          resolve();
-     })
-=======
   return new Promise(async resolve => {
      console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
     $.newShareCodes = []
@@ -359,7 +319,6 @@ function shareCodesFormat() {
     console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify($.newShareCodes)}`)
     resolve();
   })
->>>>>>> parent of aec69a6 (09)
 }
 function requireConfig() {
   return new Promise(resolve => {
