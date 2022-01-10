@@ -287,7 +287,7 @@ function readShareCode(num = 3) {
 //格式化助力码
 function shareCodesFormat() {
      return new Promise(async resolve => {
-          // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
+           console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
           $.newShareCodes = []
           // const readShareCodeRes = await readShareCode(3);
           // if (readShareCodeRes && readShareCodeRes.code === 200) {
@@ -299,11 +299,7 @@ function shareCodesFormat() {
                }
                if (process.env.CITY_SHARECODES) {
                     console.log('检测到助力码,优先. 内部互助0.01了吧,删了吧.')
-                    if (process.env.CITY_SHARECODES.indexOf('\n') > -1) {
-                         $.newShareCodes = process.env.CITY_SHARECODES.split('\n');
-                    } else {
-                         $.newShareCodes = process.env.CITY_SHARECODES.split('&');
-                    }
+                    $.newShareCodes = $.shareCodesArr[$.index - 1].split('@');
                }
           }
           // if ($.index - 1 == 0) {
